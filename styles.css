@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #ffe5b4;
+
+  .startButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.19);
+     button{
+    font-size: 25px;
+    font-weight: 500;
+    color: #fff;
+    padding: 15px 30px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background: #ff8c00;
+    cursor: pointer;
+  }
+  }
+
+  .info-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.19);
+
+    width: 540px;
+    background: #ffffff;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+
+    /* this property is require only when start button is clicked */
+    opacity: 0;
+    z-index: 5;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+
+    .info-box-title {
+      height: 50px;
+      width: 100%;
+      border-bottom: 1px solid lightgrey;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      border-radius: 5px 5px 0 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .info-list {
+      padding: 15px 30px;
+
+      .info-row {
+        margin: 5px 0;
+        font-size: 17px;
+      }
+    }
+
+    .footer {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 30px;
+      border-top: 1px solid lightgrey;
+
+      .exitBtn {
+        color: #007bff;
+        background: #fff;
+      }
+      .exitBtn:hover {
+        background: #007bff;
+        color: #fff;
+      }
+      .continueBtn {
+        color: #fff;
+        background: #007bff;
+      }
+    }
+  }
+  .footer button {
+    margin: 0 5px;
+    height: 40px;
+    width: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    transition: all 0.3s ease;
+  }
+}
