@@ -42,11 +42,7 @@ body {
     pointer-events: none;
     transition: all 0.3s ease;
 
-    /* this property is require only when start button is clicked */
-    opacity: 1;
-    z-index: 5;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
+    
 
     .info-box-title {
       height: 60px;
@@ -106,6 +102,12 @@ body {
       }
     }
   }
+  .info-box.activeInfoBox{
+     opacity: 1;
+    z-index: 5;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+  }
 
   .quiz-box {
     position: absolute;
@@ -125,10 +127,10 @@ body {
     transition: all 0.3s ease;
 
     /* remove later */
-    opacity: 1;
+    /* opacity: 1;
     z-index: 5;
     pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1); */
 
     .quiz-header-section {
       display: flex;
@@ -256,11 +258,17 @@ body {
         transition: all 0.3s ease;
 
         /* remove it and manipulate through javascript */
-        opacity: 1;
+        /* opacity: 1;
         pointer-events: auto;
         transform: scale(1);
-        background: #ff7f50;
+        background: #ff7f50; */
       }
     }
+  }
+  .quiz-box.activeQuizBox{
+      opacity: 1;
+    z-index: 5;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1); 
   }
 }
