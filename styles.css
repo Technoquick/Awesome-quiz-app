@@ -82,7 +82,7 @@ body {
         cursor: pointer;
         outline: none;
         border-radius: 5px;
-        border: 1px solid #007bff;
+        border: 1px solid #0d6ed5;
         transition: all 0.3s ease;
       }
 
@@ -187,7 +187,7 @@ body {
       }
 
       .progressBar {
-        width: 100%;
+        width: 0%;
         height: 3px;
         background: #007bff;
       }
@@ -252,8 +252,8 @@ body {
         background: #ff8c00;
         border: 1px solid #ff8c00;
         line-height: 10px;
-        opacity: 0;
-        pointer-events: none;
+        opacity: 1;
+        pointer-events: auto;
         transform: scale(0.95);
         transition: all 0.3s ease;
 
