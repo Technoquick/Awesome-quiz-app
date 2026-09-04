@@ -8,6 +8,7 @@ let allOption = document.querySelectorAll(".option");
 let nextBtn = document.querySelector(".next-btn");
 let timeline = document.querySelector(".timeline");
 let progressBar = document.querySelector(".progressBar");
+let timelineTitle = document.querySelector(".timeline-title");
 let currentQuestionIndicator = document.querySelector(
   ".currentQuestionIndicator",
 );
@@ -16,6 +17,9 @@ let currentQuestionIndex = 0;
 let userScore = 0;
 let timelineInterval = null;
 let progressBarInterval = null;
+
+const tickIcon = `<div class="icon tick"><i class="fa-solid fa-check"></i></div>`;
+const crossicon = `<div class="icon cross"><i class="fa-solid fa-xmark"></i></div>`;
 
 startBtn.addEventListener("click", () => {
   //we have to inject class name to info box
@@ -36,6 +40,7 @@ continueBtn.addEventListener("click", () => {
   showQuestion(currentQuestionIndex);
   handleTimeline(15);
   handleProgressBar();
+  // timelineTitle.innerText = "Time Up";
 });
 
 nextBtn.addEventListener("click", () => {
@@ -46,6 +51,8 @@ nextBtn.addEventListener("click", () => {
     handleTimeline(15);
     handleProgressBar();
     showQuestion(currentQuestionIndex);
+    nextBtn.classList.remove("Active");
+    timelineTitle.innerText = "Time Left";
   }
 });
 
@@ -56,18 +63,13 @@ const showQuestion = (index) => {
     "" + questions?.[index].numb + ". " + questions?.[index].question;
   for (let i = 0; i < allOption?.length; i++) {
     //reset previous question state
+    allOption[i].innerText = questions?.[index].options?.[i];
     allOption[i].classList.remove("correct");
     allOption[i].classList.remove("incorrect");
     allOption[i].classList.remove("disabled");
-
-    // Remove previous icon
-    const icon = allOption[i].querySelector(".icon");
-    if (icon) {
-      icon.remove();
+    if (index === 0) {
+      allOption[i]?.addEventListener("click", optionClickHandler);
     }
-
-    allOption[i].innerText = questions?.[index].options?.[i];
-    allOption[i]?.addEventListener("click", optionClickHandler);
   }
   currentQuestionIndicator.innerText = index + 1;
 };
@@ -86,7 +88,20 @@ const handleTimeline = (time) => {
     }
 
     if (timeValue === 0) {
+      timelineTitle.innerText = "Time Up";
       clearInterval(timelineInterval);
+      nextBtn.classList.add("Active");
+      const correctAnswer = questions[currentQuestionIndex].answer;
+      for (let i = 0; i < allOption?.length; i++) {
+        allOption[i].classList.add("disabled");
+        if (
+          allOption[i].innerText === correctAnswer
+        ) 
+        {
+          allOption[i].classList.add("correct");
+          allOption[i].insertAdjacentElement("beforeend", tickIcon);
+        }
+      }
     }
   }, 1000);
 };
@@ -104,11 +119,11 @@ const handleProgressBar = () => {
   }, 10);
 };
 
-const tickIcon = `<div class="icon tick"><i class="fa-solid fa-check"></i></div>`;
-const crossicon = `<div class="icon cross"><i class="fa-solid fa-xmark"></i></div>`;
+
 const optionClickHandler = (e) => {
   clearInterval(progressBarInterval);
   clearInterval(timelineInterval);
+  nextBtn.classList.add("Active");
   const userAnswer = e.currentTarget.innerText;
   const correctAnswer = questions[currentQuestionIndex].answer;
 
