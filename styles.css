@@ -325,11 +325,10 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
-
-    opacity: 1;
+    /* opacity: 1;
     z-index: 5;
     pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1); */
 
     .crown-icon {
       font-weight: 900;
@@ -378,12 +377,13 @@ body {
         color: #007bff;
         background: #fff;
       }
-      .result-box.activeResultBox{
+    
+    }
+  }
+    .result-box.activeResultBox{
     opacity: 1;
     z-index: 5;
     pointer-events: auto;
     transform: translate(-50%, -50%) scale(1);
       }
-    }
-  }
 }

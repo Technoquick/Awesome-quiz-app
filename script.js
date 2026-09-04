@@ -12,6 +12,8 @@ let timelineTitle = document.querySelector(".timeline-title");
 let currentQuestionIndicator = document.querySelector(
   ".currentQuestionIndicator",
 );
+
+let resultBox = document.querySelector(".result-box");
 let currentQuestionIndex = 0;
 
 let userScore = 0;
@@ -53,6 +55,11 @@ nextBtn.addEventListener("click", () => {
     showQuestion(currentQuestionIndex);
     nextBtn.classList.remove("Active");
     timelineTitle.innerText = "Time Left";
+  } else {
+    clearInterval(progressBarInterval);
+    clearInterval(timelineInterval);
+    quizBox.classList.remove("activeQuizBox");
+    resultBox.classList.add("activeResultBox");
   }
 });
 
@@ -94,12 +101,9 @@ const handleTimeline = (time) => {
       const correctAnswer = questions[currentQuestionIndex].answer;
       for (let i = 0; i < allOption?.length; i++) {
         allOption[i].classList.add("disabled");
-        if (
-          allOption[i].innerText === correctAnswer
-        ) 
-        {
+        if (allOption[i].innerText === correctAnswer) {
           allOption[i].classList.add("correct");
-          allOption[i].insertAdjacentElement("beforeend", tickIcon);
+          allOption[i].insertAdjacentHtml("beforeend", tickIcon);
         }
       }
     }
@@ -119,8 +123,10 @@ const handleProgressBar = () => {
   }, 10);
 };
 
-
 const optionClickHandler = (e) => {
+  if(e.currentTarget.classList.contains("disabled")){
+    return;
+  }
   clearInterval(progressBarInterval);
   clearInterval(timelineInterval);
   nextBtn.classList.add("Active");
@@ -130,7 +136,7 @@ const optionClickHandler = (e) => {
   if (userAnswer === correctAnswer) {
     userScore++;
     e.currentTarget.classList.add("correct");
-    e.currentTarget.insertAdjacentHTML("beforeend", tickIcon);
+    e.currentTarget.insertAdjacentElement("beforeend", tickIcon);
   } else {
     //wrong Answer
     //mark user response as wrong
@@ -147,7 +153,7 @@ const optionClickHandler = (e) => {
       allOption[i].innerText === correctAnswer
     ) {
       allOption[i].classList.add("correct");
-      allOption[i].insertAdjacentElement("beforeend", tickIcon);
+      allOption[i].insertAdjacentHTML("beforeend", tickIcon);
     }
   }
 };
