@@ -14,6 +14,9 @@ let currentQuestionIndicator = document.querySelector(
 );
 
 let resultBox = document.querySelector(".result-box");
+let quitQuiz = document.querySelector(".quit-quiz");
+let replayQuiz = document.querySelector(".replay-quiz");
+let scoreText = document.querySelector(".scoreText");
 let currentQuestionIndex = 0;
 
 let userScore = 0;
@@ -60,7 +63,22 @@ nextBtn.addEventListener("click", () => {
     clearInterval(timelineInterval);
     quizBox.classList.remove("activeQuizBox");
     resultBox.classList.add("activeResultBox");
+    handleShowResult();
   }
+});
+
+quitQuiz.addEventListener("click", () => {
+  restart();
+  resultBox.classList.remove("activeResultBox");
+});
+
+replayQuiz.addEventListener("click", () => {
+  restart();
+  resultBox.classList.remove("activeResultBox");
+  quizBox.classList.add("activeQuizBox");
+  showQuestion(currentQuestionIndex);
+  handleTimeline(15);
+  handleProgressBar();
 });
 
 //function to show /render question
@@ -103,7 +121,7 @@ const handleTimeline = (time) => {
         allOption[i].classList.add("disabled");
         if (allOption[i].innerText === correctAnswer) {
           allOption[i].classList.add("correct");
-          allOption[i].insertAdjacentHtml("beforeend", tickIcon);
+          allOption[i].insertAdjacentHTML("beforeend", tickIcon);
         }
       }
     }
@@ -124,7 +142,7 @@ const handleProgressBar = () => {
 };
 
 const optionClickHandler = (e) => {
-  if(e.currentTarget.classList.contains("disabled")){
+  if (e.currentTarget.classList.contains("disabled")) {
     return;
   }
   clearInterval(progressBarInterval);
@@ -136,7 +154,7 @@ const optionClickHandler = (e) => {
   if (userAnswer === correctAnswer) {
     userScore++;
     e.currentTarget.classList.add("correct");
-    e.currentTarget.insertAdjacentElement("beforeend", tickIcon);
+    e.currentTarget.insertAdjacentHTML("beforeend", tickIcon);
   } else {
     //wrong Answer
     //mark user response as wrong
@@ -156,4 +174,19 @@ const optionClickHandler = (e) => {
       allOption[i].insertAdjacentHTML("beforeend", tickIcon);
     }
   }
+};
+
+const restart = () => {
+  clearInterval(progressBarInterval);
+  clearInterval(timelineInterval);
+  userScore = 0;
+  currentQuestionIndex = 0;
+  timelineTitle.innerText = "Time left";
+};
+
+const handleShowResult = () => {
+  scoreText.innerHTML = `<span>
+           and nice 😊 ' you got 
+          <p>${userScore}</p>  out of   <p>${questions?.length}</p>
+         </span>  `;
 };
